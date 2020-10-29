@@ -1,4 +1,4 @@
-
+---
 - name: Another network playbook example
   # The line below uses regex to parse the inventory file
   hosts: ~^arista
@@ -7,7 +7,7 @@
                    # if turned to yes you'll collect info about the local host :(
   
   vars:
-    switchint: 14
+    switchint: 1
     switchver: "4.22"
     
   tasks:
@@ -18,10 +18,10 @@
 
   - name: Push to the local system -- by special tag request only 
     copy:
-      # use the to_nice_json filter to display pretty JSON output
+      # Use the to_no_json filter to display pretty JSON output
       content: "{{ ansible_facts | to_nice_json }}"
       dest: "/home/student/mycode/{{ inventory_hostname }}.txt"
-      # the inventory_hostname variable always resolves to the current host being iterated against
+      # The inventory_hostname variable always resolves to the current host being iterated against
     tags:
       - never
       - grabfacts
@@ -29,7 +29,7 @@
     # Precheck conditional number of interfaces
   - fail:
       msg: "FAIL. Network device lacks the correct number of interfaces."
-    when: ansible_facts.net_interfaces|length != switch|int
+    when: ansible_facts.net_interfaces|length != switchint
     
     # Firmware precheck on correct major and minor versions
   - fail:
