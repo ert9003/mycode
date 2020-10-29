@@ -1,0 +1,14 @@
+---
+- name: ansible challenge 01
+  host: planet_express
+
+- vars_prompt:  
+  - name: "apt_package_name"
+    prompt: "apt to install"
+    private: no
+    
+  tasks:
+  - name: "apt module - Install a simple application"
+    debug:
+      msg: {{"apt_package_name"}}
+
