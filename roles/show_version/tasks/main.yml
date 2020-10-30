@@ -1,0 +1,4 @@
+- name: Show the version
+  cli_command:
+    command: show verion
+
